@@ -8,9 +8,9 @@ from sklearn.metrics import confusion_matrix
 import seaborn as sns
 import matplotlib.pyplot as plt
 
-st.title('Mulberry Species Data Visualisation App')
+st.title('Mulberry Species Prediction App')
 
-st.write('This app enables Data Visualisation of Mulberry species and their leaf measurements.')
+st.write('This app enables to predict Mulberry species based on the leaf measurements.')
 
 # Load and display data
 
