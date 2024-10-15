@@ -14,7 +14,7 @@ st.write('This app enables Data Visualisation of Mulberry species and their leaf
 
 # Load and display data
 
-df = pd.read_csv('https://raw.githubusercontent.com/ChaitraPhD/Machine-learning-streamlit/refs/heads/master/mulberry_leafyield.csv')
+df = pd.read_csv('https://raw.githubusercontent.com/ChaitraPhD/Mulberry-Species-Prediction-App/refs/heads/master/mulberry_leafyield.csv')
     
     
 def filter_sparse_classes(df, target_column, min_samples=2):
