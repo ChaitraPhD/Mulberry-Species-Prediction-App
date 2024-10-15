@@ -1,9 +1,5 @@
-# 📦 Streamlit App Starter Kit 
-```
-⬆️ (Replace above with your app's name)
-```
+# 🌿 Mulberry Species Prediction App
 
-Description of the app ...
 
 ## Demo App
 
