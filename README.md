@@ -3,7 +3,7 @@
 
 ## Demo App
 
-[![Streamlit App]( https://mulberry-species-prediction-machinelearning-app.streamlit.app/ )](https://app-starter-kit.streamlit.app/)
+[![Streamlit App]( https://mulberry-species-prediction-machinelearning-app.streamlit.app/ )]
 
 ## GitHub Codespaces
 
