@@ -17,16 +17,20 @@ from sklearn.neighbors import KNeighborsClassifier
 
 from imblearn.over_sampling import SMOTE
 
+st.set_page_config(page_title="Mulberry Species Classifier", layout="wide")
 st.title('🌿 Mulberry Species Prediction App')
 
 # Load Data
 @st.cache_data
 def load_data():
-    url = 'https://raw.githubusercontent.com/ChaitraPhD/Mulberry-Species-Prediction-App/refs/heads/master/mulberry_leafyield.csv'
+    url = 'https://raw.githubusercontent.com/ChaitraPhD/Mulberry-Species-Prediction-App/master/mulberry_leafyield.csv'
     df = pd.read_csv(url)
     return df
 
 df = load_data()
+
+# Fix column names (remove extra spaces)
+df.columns = df.columns.str.strip()
 
 # Filter classes with at least 2 samples
 def filter_sparse_classes(df, target_column, min_samples=2):
@@ -46,15 +50,15 @@ y_encoded = label_encoder.fit_transform(y)
 sm = SMOTE(random_state=42)
 X_res, y_res = sm.fit_resample(X, y_encoded)
 
-# Sidebar for input
+# Sidebar input
 st.sidebar.header("🌱 Input Features")
 input_data = {
     'Internodal_distance_cm': st.sidebar.slider('Internodal Distance (cm)', 1.2, 4.5, 2.5),
-    ' Leaf_lamina_length _cm': st.sidebar.slider('Leaf Lamina Length (cm)', 1.2, 14.5, 8.0),
+    'Leaf_lamina_length _cm': st.sidebar.slider('Leaf Lamina Length (cm)', 1.2, 14.5, 8.0),
     'Leaf_lamina_width_cm': st.sidebar.slider('Leaf Lamina Width (cm)', 5.0, 12.5, 8.0),
     'Leaf_size_sq.cm': st.sidebar.slider('Leaf Size (sq.cm)', 30, 180, 100),
-    ' Petiole_length_cm': st.sidebar.slider('Petiole Length (cm)', 2.0, 5.0, 3.5),
-    ' Petiole_width_cm': st.sidebar.slider('Petiole Width (cm)', 0.28, 0.34, 0.31)
+    'Petiole_length_cm': st.sidebar.slider('Petiole Length (cm)', 2.0, 5.0, 3.5),
+    'Petiole_width_cm': st.sidebar.slider('Petiole Width (cm)', 0.28, 0.34, 0.31)
 }
 input_df = pd.DataFrame([input_data])
 
@@ -78,7 +82,7 @@ st.subheader("📊 Model Comparison (Cross-Validation)")
 results = compare_models(X_res, y_res)
 st.dataframe(pd.DataFrame(results.items(), columns=['Model', 'Accuracy']).sort_values(by='Accuracy', ascending=False))
 
-# Train final model (Random Forest)
+# Final Model Training
 X_train, X_test, y_train, y_test = train_test_split(X_res, y_res, test_size=0.2, random_state=42, stratify=y_res)
 rf = RandomForestClassifier(random_state=42)
 rf.fit(X_train, y_train)
